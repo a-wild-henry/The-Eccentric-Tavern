@@ -77,7 +77,7 @@ with col1_2:
 with col3:
     personality = st.selectbox("Choose your favorite character:",
      ["🎩 Trusty butler", "⚓️ Pirate", "👱🏻‍♀️ Sorority girl"])
-    provider = st.selectbox("Choose a model:", ["GPT 4o", "DeepSeek V3.1", "Grok 4"])
+    provider = st.selectbox("Choose a model:", ["Mistral Small 3.2","GPT 4o", "DeepSeek V3.1", "Grok 4"])
 
 # Input and button row below chat history
 col1, col2, col3 = st.columns([2.5, 0.5, 1])
