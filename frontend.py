@@ -9,7 +9,8 @@ st.set_page_config(
 )
 
 st.title ("The Eccentric Tavern")
-st.write("You walk into a cozy tavern on a chilly winter night and sit down on a bench by the fireplace... Choose a character to talk to on the right")
+st.write("You walk into a cozy tavern on a chilly winter night and sit down on a bench by the fireplace... Choose a character and start chatting!"
+"")
 
 #initialize chat history and itext box
 if "chat_history" not in st.session_state:
@@ -61,6 +62,14 @@ with col1_2:
                         st.chat_message("assistant", avatar="⚓️").write(f"{msg['content']}")
                     elif st.session_state.last_personality == "👱🏻‍♀️ Sorority girl":
                         st.chat_message("assistant", avatar="👱🏻‍♀️").write(f"{msg['content']}")
+        else:
+            # Show placeholder image when chat history is empty
+            st.markdown("<br><br>", unsafe_allow_html=True)  # Add vertical spacing
+            image_col1, image_col2, image_col3 = st.columns([1, 1, 1])
+            with image_col2:
+                st.image("tavern.png", 
+                        caption="", 
+                        width=400)
         
         # Streaming response placeholder inside the chat container
         if st.session_state.waiting_for_response:
@@ -74,7 +83,7 @@ with col3:
 col1, col2, col3 = st.columns([2.5, 0.5, 1])
 
 with col1:
-    prompt = st.text_input("hi", key="input", autocomplete="off", label_visibility="collapsed")
+    prompt = st.text_input("type here", key="input", autocomplete="off", label_visibility="collapsed")
 
 with col2:
     talk_button = st.button("Talk", use_container_width=True)
