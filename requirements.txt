@@ -1,2 +1,8 @@
 streamlit
 openai
+openpyxl
+pandas
+pillow
+python-docx
+PyPDF2
+pillow-heif

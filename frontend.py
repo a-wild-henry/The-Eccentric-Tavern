@@ -54,6 +54,8 @@ with col1:
 
     provider = st.selectbox("Choose a model:", ["Mistral Small 3.2","GPT 4o", "DeepSeek V3.1", "Grok 4"])
 
+    image_upload = st.file_uploader("", accept_multiple_files=True, type=['png', 'jpg', 'jpeg', 'gif', 'bmp', 'tiff', 'webp', 'heic', 'csv', 'xlsx', 'xls', 'docx', 'pdf'])
+
 
 with col2_3:
     # Chat history in scrollable container (always visible)
@@ -83,19 +85,17 @@ with col2_3:
         # Streaming response placeholder inside the chat container
         if st.session_state.waiting_for_response:
             st.session_state.streaming_placeholder = st.empty()
+    
+    #prompt box and talk button
+    col1, col2 = st.columns([6, 1])
+    
+    with col1:
+        prompt = st.text_input("", key="input", autocomplete="off", label_visibility="collapsed",  placeholder= "Say something...")
 
-# Input and button row below chat history
-col1, col2, col3 = st.columns([1, 2.5, 0.5])
+    with col2:
+        talk_button = st.button("Talk", use_container_width=True)
 
-
-
-with col2:
-    prompt = st.text_input("", key="input", autocomplete="off", label_visibility="collapsed",  placeholder= "Say something...")
-
-with col3:
-    talk_button = st.button("Talk", use_container_width=True)
-
-
+   
 
 
 
@@ -120,6 +120,7 @@ if st.session_state.waiting_for_response:
     
     for chunk in use_model(
         st.session_state.pending_prompt,
+        image_upload,
         st.session_state.chat_history[:-2],  # Pass history without the user message and empty assistant message
         provider=provider,
         personality=personality,
