@@ -47,13 +47,12 @@ col1, col2_3 = st.columns([1, 3])
 
 with col1:
     st.title ("The Eccentric Tavern")
-    st.write("You walk into a cozy tavern on a chilly winter night and sit down on a bench by the fireplace... Choose a character and start chatting!")
+    st.write("You walk into a small, cozy tavern on a chilly winter night and sit down on a bench by the fireplace...")
+    st.write("") #add vertical spacing
     st.write("")
     
-    personality = st.selectbox("Choose your favorite character:",
+    personality = st.selectbox("Choose a character to chat with:",
      ["🎩 Trusty butler", "⚓️ Pirate", "👱🏻‍♀️ Sorority girl"])
-    
-    st.write("")
 
     provider = st.selectbox("Choose a model:", ["Mistral Small 3.2","GPT 4o", "DeepSeek V3.1", "Grok 4"])
 
