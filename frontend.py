@@ -37,9 +37,7 @@ if st.session_state.clear_input:
     st.session_state.input = ""
     st.session_state.clear_input = False
 
-
-
-
+ 
 
     
 # Chat history spans columns 1 and 2
@@ -92,7 +90,7 @@ col1, col2, col3 = st.columns([1, 2.5, 0.5])
 
 
 with col2:
-    prompt = st.text_input("type here", key="input", autocomplete="off", label_visibility="collapsed")
+    prompt = st.text_input("", key="input", autocomplete="off", label_visibility="collapsed",  placeholder= "Say something...")
 
 with col3:
     talk_button = st.button("Talk", use_container_width=True)
