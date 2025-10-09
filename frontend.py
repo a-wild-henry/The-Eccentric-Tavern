@@ -5,12 +5,10 @@ from backend import use_model
 st.set_page_config(
     layout="wide",
     page_title="The Eccentric Tavern",
-    page_icon="🤖"
+    page_icon="🪑"
 )
 
-st.title ("The Eccentric Tavern")
-st.write("You walk into a cozy tavern on a chilly winter night and sit down on a bench by the fireplace... Choose a character and start chatting!"
-"")
+
 
 #initialize chat history and itext box
 if "chat_history" not in st.session_state:
@@ -45,11 +43,24 @@ if st.session_state.clear_input:
 
     
 # Chat history spans columns 1 and 2
-col1_2, col3 = st.columns([3, 1])
+col1, col2_3 = st.columns([1, 3])
 
-with col1_2:
+with col1:
+    st.title ("The Eccentric Tavern")
+    st.write("You walk into a cozy tavern on a chilly winter night and sit down on a bench by the fireplace... Choose a character and start chatting!")
+    st.write("")
+    
+    personality = st.selectbox("Choose your favorite character:",
+     ["🎩 Trusty butler", "⚓️ Pirate", "👱🏻‍♀️ Sorority girl"])
+    
+    st.write("")
+
+    provider = st.selectbox("Choose a model:", ["Mistral Small 3.2","GPT 4o", "DeepSeek V3.1", "Grok 4"])
+
+
+with col2_3:
     # Chat history in scrollable container (always visible)
-    chat_container = st.container(height=500)
+    chat_container = st.container(height=630)
     with chat_container:
         if st.session_state.chat_history:
             for msg in st.session_state.chat_history:
@@ -64,29 +75,29 @@ with col1_2:
                         st.chat_message("assistant", avatar="👱🏻‍♀️").write(f"{msg['content']}")
         else:
             # Show placeholder image when chat history is empty
-            st.markdown("<br><br>", unsafe_allow_html=True)  # Add vertical spacing
-            image_col1, image_col2, image_col3 = st.columns([1, 1, 1])
+            st.markdown("<br><br><br><br>", unsafe_allow_html=True)  # Add vertical spacing
+            image_col1, image_col2, image_col3 = st.columns([1, 1.2, 1])
             with image_col2:
                 st.image("tavern.png", 
                         caption="", 
-                        width=400)
+                        width=500, 
+                        use_container_width=True)
         
         # Streaming response placeholder inside the chat container
         if st.session_state.waiting_for_response:
             st.session_state.streaming_placeholder = st.empty()
-with col3:
-    personality = st.selectbox("Choose your favorite character:",
-     ["🎩 Trusty butler", "⚓️ Pirate", "👱🏻‍♀️ Sorority girl"])
-    provider = st.selectbox("Choose a model:", ["Mistral Small 3.2","GPT 4o", "DeepSeek V3.1", "Grok 4"])
 
 # Input and button row below chat history
-col1, col2, col3 = st.columns([2.5, 0.5, 1])
+col1, col2, col3 = st.columns([1, 2.5, 0.5])
 
-with col1:
-    prompt = st.text_input("type here", key="input", autocomplete="off", label_visibility="collapsed")
+
 
 with col2:
+    prompt = st.text_input("type here", key="input", autocomplete="off", label_visibility="collapsed")
+
+with col3:
     talk_button = st.button("Talk", use_container_width=True)
+
 
 
 
