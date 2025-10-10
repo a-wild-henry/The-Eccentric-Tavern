@@ -16,6 +16,7 @@ openai_client = OpenAI(api_key=st.secrets["OPENAI_API_KEY"])
 deepseek_client = OpenAI(api_key=st.secrets["DEEPSEEK_API_KEY"], base_url="https://api.deepseek.com")
 xai_client = OpenAI(api_key=st.secrets["XAI_API_KEY"], base_url="https://api.x.ai/v1")
 mistral_client = OpenAI(api_key=st.secrets["MISTRAL_API_KEY"], base_url="https://api.mistral.ai/v1")
+perplexity_client = OpenAI(api_key= st.secrets["PERPLEXITY_API_KEY"], base_url= "https://api.perplexity.ai")
 
 #Convert uploaded image file to base64 string for API
 def encode_image(image_file):
@@ -138,6 +139,9 @@ def use_model(prompt, image_upload, chat_history=None, provider="Mistral Small 3
     elif provider == "Grok 4":
         client = xai_client
         model = "grok-4"
+    elif provider == "Sonar":
+        client = perplexity_client
+        model = "sonar"
     elif provider == "Mistral Small 3.2":
         client = mistral_client
         model = "mistral-small-2506"

@@ -52,7 +52,7 @@ with col1:
     personality = st.selectbox("Choose a character to chat with:",
      ["🎩 Trusty butler", "⚓️ Pirate", "👱🏻‍♀️ Sorority girl"])
 
-    provider = st.selectbox("Choose a model:", ["Mistral Small 3.2","GPT 4o", "DeepSeek V3.1", "Grok 4"])
+    provider = st.selectbox("Choose a model:", ["Mistral Small 3.2","GPT 4o", "DeepSeek V3.1", "Grok 4", "Sonar"])
 
     image_upload = st.file_uploader("", accept_multiple_files=True, type=['png', 'jpg', 'jpeg', 'gif', 'bmp', 'tiff', 'webp', 'heic', 'csv', 'xlsx', 'xls', 'docx', 'pdf'])
 
