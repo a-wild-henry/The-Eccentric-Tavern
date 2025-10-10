@@ -15,7 +15,7 @@ if "chat_history" not in st.session_state:
     st.session_state.chat_history = []
 
 if "last_provider" not in st.session_state:
-    st.session_state.last_provider = "GPT 4o"
+    st.session_state.last_provider = "Mistral Small 3.2"
 
 if "last_personality" not in st.session_state:
     st.session_state.last_personality = "🎩 Trusty butler"
@@ -50,9 +50,9 @@ with col1:
     st.write("")
     
     personality = st.selectbox("Choose a character to chat with:",
-     ["🎩 Trusty butler", "⚓️ Pirate", "👱🏻‍♀️ Sorority girl"])
+     ["🎩 Trusty butler", "⚓️ Pirate", "👱🏻‍♀️ Sorority girl", "😪 Boring assistant"])
 
-    provider = st.selectbox("Choose a model:", ["Mistral Small 3.2","GPT 4o", "DeepSeek V3.1", "Grok 4", "Sonar"])
+    provider = st.selectbox("Choose a model:", ["Mistral Small 3.2","GPT 5", "DeepSeek V3.1", "Grok 4", "Sonar"])
 
     image_upload = st.file_uploader("", accept_multiple_files=True, type=['png', 'jpg', 'jpeg', 'gif', 'bmp', 'tiff', 'webp', 'heic', 'csv', 'xlsx', 'xls', 'docx', 'pdf'])
 
@@ -72,6 +72,8 @@ with col2_3:
                         st.chat_message("assistant", avatar="⚓️").write(f"{msg['content']}")
                     elif st.session_state.last_personality == "👱🏻‍♀️ Sorority girl":
                         st.chat_message("assistant", avatar="👱🏻‍♀️").write(f"{msg['content']}")
+                    elif st.session_state.last_personality == "😪 Boring assistant":
+                        st.chat_message("assistant", avatar="😪").write(f"{msg['content']}")
         else:
             # Show placeholder image when chat history is empty
             st.markdown("<br><br><br><br>", unsafe_allow_html=True)  # Add vertical spacing
@@ -137,6 +139,8 @@ if st.session_state.waiting_for_response:
                     st.chat_message("assistant", avatar="⚓️").write(full_response)
                 elif personality == "👱🏻‍♀️ Sorority girl":
                     st.chat_message("assistant", avatar="👱🏻‍♀️").write(full_response)
+                elif personality == "😪 Boring assistant":
+                    st.chat_message("assistant", avatar="😪").write(full_response)
     
     # Update the final response in chat history
     st.session_state.chat_history[-1]["content"] = full_response
