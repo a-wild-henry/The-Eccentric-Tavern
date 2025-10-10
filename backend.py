@@ -243,7 +243,7 @@ def use_model(prompt, image_upload, chat_history=None, provider="Mistral Small 3
             model=model,
             messages=[{"role": "system", "content": system_prompt}] + chat_history + [user_message],
             stream=True,
-            reasoning_effort= "medium",
+            reasoning_effort= "minimal",
             max_completion_tokens=10000
         )
     else:
