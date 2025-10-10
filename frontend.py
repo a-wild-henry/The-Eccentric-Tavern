@@ -105,6 +105,8 @@ if (
     or personality != st.session_state.last_personality
 ):
     st.session_state.chat_history = []  
+    st.session_state.waiting_for_response = False
+    st.session_state.pending_prompt = ""
     st.session_state.last_provider = provider
     st.session_state.last_personality = personality
     st.rerun()
