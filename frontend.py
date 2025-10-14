@@ -20,11 +20,6 @@ if "last_provider" not in st.session_state:
 if "last_personality" not in st.session_state:
     st.session_state.last_personality = "🎩 Trusty butler"
 
-if "input" not in st.session_state:
-    st.session_state.input = ""
-
-if "clear_input" not in st.session_state:
-    st.session_state.clear_input = False
 
 if "waiting_for_response" not in st.session_state:
     st.session_state.waiting_for_response = False
@@ -32,10 +27,6 @@ if "waiting_for_response" not in st.session_state:
 if "pending_prompt" not in st.session_state:
     st.session_state.pending_prompt = ""
 
-# Clear input if flag is set
-if st.session_state.clear_input:
-    st.session_state.input = ""
-    st.session_state.clear_input = False
 
  
 
@@ -88,14 +79,8 @@ with col2_3:
         if st.session_state.waiting_for_response:
             st.session_state.streaming_placeholder = st.empty()
     
-    #prompt box and talk button
-    col1, col2 = st.columns([6, 1])
-    
-    with col1:
-        prompt = st.text_input("", key="input", autocomplete="off", label_visibility="collapsed",  placeholder= "Say something...")
-
-    with col2:
-        talk_button = st.button("Talk", use_container_width=True)
+    # Chat input
+    prompt = st.chat_input("Say something...")
 
    
 
@@ -148,11 +133,10 @@ if st.session_state.waiting_for_response:
     st.session_state.pending_prompt = ""
     st.rerun()
 
-#talk by pressing return or talk button
-if prompt or talk_button:
+# Handle chat input submission
+if prompt:
     # Add user message to chat history immediately
     st.session_state.chat_history.append({"role": "user", "content": prompt})
-    st.session_state.clear_input = True
     st.session_state.waiting_for_response = True
     st.session_state.pending_prompt = prompt
     st.rerun()
